@@ -1,11 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+
+import '../src/styles/App.css';
+import Landing from './pages/Landing';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-
+        <Landing />
       </header>
     </div>
   );
