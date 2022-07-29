@@ -13,11 +13,11 @@ const Landing = () => {
       </div>
       <div className='grid-container'>
         <div className='row' id='row-one'>
-          <div className='square' id='00'> </div>
-          <div className='square' id='01'></div>
-          <div className='square' id='02'></div>
-          <div className='square' id='03'></div>
-          <div className='square' id='04'></div>
+          <div className='square' id='00'>W</div>
+          <div className='square correct-letter' id='01'>O</div>
+          <div className='square correct-place' id='02'>R</div>
+          <div className='square' id='03'>D</div>
+          <div className='square wrong-letter' id='04'>L</div>
         </div>
         <div className='row' id='row-two'>
           <div className='square' id='10'></div>
