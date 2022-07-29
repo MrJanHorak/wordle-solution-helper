@@ -1,4 +1,10 @@
 import React from 'react';
+
+// assets
+import sourceWords from '../data/words_dictionary.json'
+import cleanWordList from '../js/cleanWordList'; 
+
+// style
 import '../styles/Landing.css'
 
 const Landing = () => {

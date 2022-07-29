@@ -1,6 +1,8 @@
-
-import '../src/styles/App.css';
+// pages
 import Landing from './pages/Landing';
+
+// style
+import '../src/styles/App.css';
 
 function App() {
   return (
