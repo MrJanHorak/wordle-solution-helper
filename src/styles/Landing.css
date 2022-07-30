@@ -42,3 +42,18 @@ body{
 .wrong-letter {
   background-color: #787c7f;
 }
+
+.tip-suggestion-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.tips {
+  border: 2px solid #d3d6da;
+  width: 300px;
+}
+
+.word-suggestions{
+  border: 2px solid #d3d6da;
+  width: 300px;
+}
