@@ -198,6 +198,9 @@ const Landing = () => {
               {letterArray[5][4]}
             </div>
           </div>
+          <div className="input-button">
+            <button>Look for Words</button>
+          </div>
         </div>
         <div className="word-suggestions">suggestions here</div>
       </div>
