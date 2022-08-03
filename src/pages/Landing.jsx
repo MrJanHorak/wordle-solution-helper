@@ -24,8 +24,6 @@ const Landing = () => {
     rowArray[square[1]]==='correct-letter'?rowArray[square[1]]='correct-place':
     rowArray[square[1]]=''
     setSquareClass({...squareClass, [square[0]]:rowArray})
-
-    console.log(squareClass)
   };
 
   return (
