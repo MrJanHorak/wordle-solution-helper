@@ -58,3 +58,10 @@ body{
   border: 2px solid #d3d6da;
   width: 300px;
 }
+
+input {
+  text-align: center;
+  border-color:#f7da21 ;
+  background-color: transparent;
+  color: transparent;
+}
