@@ -26,6 +26,15 @@ const Landing = () => {
     5: [[], [], [], [], []],
   });
 
+  const [rowFull, setRowFull] = useState({
+    0: false,
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+  });
+
   const [activeRow, setActiveRow] = useState(0);
   let inputArray = [];
 
@@ -43,21 +52,26 @@ const Landing = () => {
         ? (rowArray[square[1]] = "correct-place")
         : (rowArray[square[1]] = "");
       setSquareClass({ ...squareClass, [square[0]]: rowArray });
-    } 
+    }
   };
 
   const handleChange = (e) => {
     if (onlyLetters(e.target.value)) {
       inputArray = e.target.value.toUpperCase().split("");
-      console.log(inputArray);
+      if (inputArray.length === 5) {
+        setRowFull({ ...rowFull, [activeRow]: true });
+      }
       setLetterArray({ ...letterArray, [activeRow]: inputArray });
-      console.log(letterArray);
     } else {
-      inputArray = [[], [], [], [], []]
+      inputArray = [[], [], [], [], []];
       setLetterArray({ ...letterArray, [activeRow]: inputArray });
-      e.target.value = ''
+      e.target.value = "";
     }
   };
+
+  const handleButton = () => {
+    setActiveRow(activeRow+1)
+  }
 
   return (
     <div className="solver-container">
@@ -73,7 +87,9 @@ const Landing = () => {
             onClick={activeRow === 0 ? handleClick : undefined}
           >
             {activeRow === 0 && (
-              <div className="letter-input">
+              <div
+                className={`letter-input ${rowFull[0] ? "rowfull" : undefined}`}
+              >
                 <input
                   type="text"
                   name="0"
@@ -107,7 +123,9 @@ const Landing = () => {
             onClick={activeRow === 1 ? handleClick : undefined}
           >
             {activeRow === 1 && (
-              <div className="letter-input">
+              <div
+                className={`letter-input ${rowFull[1] ? "rowfull" : undefined}`}
+              >
                 <input
                   type="text"
                   name="0"
@@ -141,7 +159,9 @@ const Landing = () => {
             onClick={activeRow === 2 ? handleClick : undefined}
           >
             {activeRow === 2 && (
-              <div className="letter-input">
+              <div
+                className={`letter-input ${rowFull[2] ? "rowfull" : undefined}`}
+              >
                 <input
                   type="text"
                   name="0"
@@ -175,7 +195,9 @@ const Landing = () => {
             onClick={activeRow === 3 ? handleClick : undefined}
           >
             {activeRow === 3 && (
-              <div className="letter-input">
+              <div
+                className={`letter-input ${rowFull[3] ? "rowfull" : undefined}`}
+              >
                 <input
                   type="text"
                   name="0"
@@ -209,7 +231,9 @@ const Landing = () => {
             onClick={activeRow === 4 ? handleClick : undefined}
           >
             {activeRow === 4 && (
-              <div className="letter-input">
+              <div
+                className={`letter-input ${rowFull[4] ? "rowfull" : undefined}`}
+              >
                 <input
                   type="text"
                   name="0"
@@ -243,7 +267,9 @@ const Landing = () => {
             onClick={activeRow === 5 ? handleClick : undefined}
           >
             {activeRow === 5 && (
-              <div className="letter-input">
+              <div
+                className={`letter-input ${rowFull[5] ? "rowfull" : undefined}`}
+              >
                 <input
                   type="text"
                   name="0"
@@ -272,7 +298,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="input-button">
-            <button>Look for Words</button>
+            <button onClick={handleButton}>Look for Words</button>
           </div>
         </div>
         <div className="word-suggestions">suggestions here</div>
