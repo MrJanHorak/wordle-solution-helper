@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-// assets
-import sourceWords from "../data/words_dictionary.json";
-import cleanWordList from "../js/cleanWordList";
+// components
+import SuggestWords from "../components/SuggestWords";
 
 // style
 import "../styles/Landing.css";
@@ -63,6 +62,7 @@ const Landing = () => {
       inputArray = e.target.value.toUpperCase().split("");
       if (inputArray.length === 5) {
         setRowFull({ ...rowFull, [activeRow]: true });
+        setMessage("now select letters");
       }
       setLetterArray({ ...letterArray, [activeRow]: inputArray });
     } else {
@@ -74,10 +74,13 @@ const Landing = () => {
   };
 
   const handleButton = () => {
-    if (activeRow === 6) setMessage("All rows are filled");
     if (!rowFull[activeRow]) return;
     setActiveRow(activeRow + 1);
+    if (activeRow === 5) setMessage("All rows are filled")
+    if (activeRow<5) setMessage("enter letters below")
   };
+
+  useEffect(() =>{},[activeRow])
 
   return (
     <div className="solver-container">
@@ -308,7 +311,7 @@ const Landing = () => {
             <button onClick={handleButton}>Look for Words</button>
           </div>
         </div>
-        <div className="word-suggestions">suggestions here</div>
+        <div className="word-suggestions"><SuggestWords letters={letterArray[activeRow]} highlighted={squareClass[activeRow]}/></div>
       </div>
     </div>
   );
