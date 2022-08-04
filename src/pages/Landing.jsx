@@ -35,7 +35,8 @@ const Landing = () => {
   });
 
   const [activeRow, setActiveRow] = useState(0);
-
+  const [searchLetters, setSearchLetters] = useState([])
+  const [searchPriority, setSearchPriority] = useState([])
   const [message, setMessage] = useState("enter letters below");
   let inputArray = [];
 
@@ -76,11 +77,14 @@ const Landing = () => {
   const handleButton = () => {
     if (!rowFull[activeRow]) return;
     setActiveRow(activeRow + 1);
+    setSearchLetters(letterArray[activeRow])
+    setSearchPriority(squareClass[activeRow])
+    setMessage('searching words')
     if (activeRow === 5) setMessage("All rows are filled")
     if (activeRow<5) setMessage("enter letters below")
   };
 
-  useEffect(() =>{},[activeRow])
+  // useEffect(() =>{},[buttonPush])
 
   return (
     <div className="solver-container">
@@ -311,7 +315,7 @@ const Landing = () => {
             <button onClick={handleButton}>Look for Words</button>
           </div>
         </div>
-        <div className="word-suggestions"><SuggestWords letters={letterArray[activeRow]} highlighted={squareClass[activeRow]}/></div>
+        <div className="word-suggestions"><SuggestWords letters={searchLetters} highlighted={searchPriority}/></div>
       </div>
     </div>
   );
