@@ -43,7 +43,7 @@ const Landing = () => {
         ? (rowArray[square[1]] = "correct-place")
         : (rowArray[square[1]] = "");
       setSquareClass({ ...squareClass, [square[0]]: rowArray });
-    }
+    } 
   };
 
   const handleChange = (e) => {
@@ -52,6 +52,10 @@ const Landing = () => {
       console.log(inputArray);
       setLetterArray({ ...letterArray, [activeRow]: inputArray });
       console.log(letterArray);
+    } else {
+      inputArray = [[], [], [], [], []]
+      setLetterArray({ ...letterArray, [activeRow]: inputArray });
+      e.target.value = ''
     }
   };
 
@@ -68,16 +72,20 @@ const Landing = () => {
             id="row-one"
             onClick={activeRow === 0 ? handleClick : undefined}
           >
+            {activeRow === 0 && (
+              <div className="letter-input">
+                <input
+                  type="text"
+                  name="0"
+                  maxLength={5}
+                  required
+                  autoComplete="off"
+                  onChange={activeRow === 0 ? handleChange : undefined}
+                  spellCheck="false"
+                />
+              </div>
+            )}
             <div className={`square ${squareClass[0][0]}`} id="00">
-              <input
-                type="text"
-                name="0"
-                maxLength={5}
-                required
-                autoComplete="off"
-                onChange={activeRow === 0 ? handleChange : undefined}
-                spellCheck="false"
-              />
               {letterArray[0][0]}
             </div>
             <div className={`square ${squareClass[0][1]}`} id="01">
@@ -98,6 +106,19 @@ const Landing = () => {
             id="row-two"
             onClick={activeRow === 1 ? handleClick : undefined}
           >
+            {activeRow === 1 && (
+              <div className="letter-input">
+                <input
+                  type="text"
+                  name="0"
+                  maxLength={5}
+                  required
+                  autoComplete="off"
+                  onChange={activeRow === 1 ? handleChange : undefined}
+                  spellCheck="false"
+                />
+              </div>
+            )}
             <div className={`square ${squareClass[1][0]}`} id="10">
               {letterArray[1][0]}
             </div>
@@ -119,6 +140,19 @@ const Landing = () => {
             id="row-three"
             onClick={activeRow === 2 ? handleClick : undefined}
           >
+            {activeRow === 2 && (
+              <div className="letter-input">
+                <input
+                  type="text"
+                  name="0"
+                  maxLength={5}
+                  required
+                  autoComplete="off"
+                  onChange={activeRow === 2 ? handleChange : undefined}
+                  spellCheck="false"
+                />
+              </div>
+            )}
             <div className={`square ${squareClass[2][0]}`} id="20">
               {letterArray[2][0]}
             </div>
@@ -140,6 +174,19 @@ const Landing = () => {
             id="row-four"
             onClick={activeRow === 3 ? handleClick : undefined}
           >
+            {activeRow === 3 && (
+              <div className="letter-input">
+                <input
+                  type="text"
+                  name="0"
+                  maxLength={5}
+                  required
+                  autoComplete="off"
+                  onChange={activeRow === 3 ? handleChange : undefined}
+                  spellCheck="false"
+                />
+              </div>
+            )}
             <div className={`square ${squareClass[3][0]}`} id="30">
               {letterArray[3][0]}
             </div>
@@ -161,6 +208,19 @@ const Landing = () => {
             id="row-five"
             onClick={activeRow === 4 ? handleClick : undefined}
           >
+            {activeRow === 4 && (
+              <div className="letter-input">
+                <input
+                  type="text"
+                  name="0"
+                  maxLength={5}
+                  required
+                  autoComplete="off"
+                  onChange={activeRow === 4 ? handleChange : undefined}
+                  spellCheck="false"
+                />
+              </div>
+            )}
             <div className={`square ${squareClass[4][0]}`} id="40">
               {letterArray[4][0]}
             </div>
@@ -182,6 +242,19 @@ const Landing = () => {
             id="row-six"
             onClick={activeRow === 5 ? handleClick : undefined}
           >
+            {activeRow === 5 && (
+              <div className="letter-input">
+                <input
+                  type="text"
+                  name="0"
+                  maxLength={5}
+                  required
+                  autoComplete="off"
+                  onChange={activeRow === 5 ? handleChange : undefined}
+                  spellCheck="false"
+                />
+              </div>
+            )}
             <div className={`square ${squareClass[5][0]}`} id="50">
               {letterArray[5][0]}
             </div>
