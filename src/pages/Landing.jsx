@@ -36,6 +36,8 @@ const Landing = () => {
   });
 
   const [activeRow, setActiveRow] = useState(0);
+
+  const [message, setMessage] = useState("enter letters below");
   let inputArray = [];
 
   const onlyLetters = (str) => {
@@ -57,6 +59,7 @@ const Landing = () => {
 
   const handleChange = (e) => {
     if (onlyLetters(e.target.value)) {
+      setMessage("enter letters below");
       inputArray = e.target.value.toUpperCase().split("");
       if (inputArray.length === 5) {
         setRowFull({ ...rowFull, [activeRow]: true });
@@ -66,18 +69,22 @@ const Landing = () => {
       inputArray = [[], [], [], [], []];
       setLetterArray({ ...letterArray, [activeRow]: inputArray });
       e.target.value = "";
+      setMessage("oops you entered a number!");
     }
   };
 
   const handleButton = () => {
-    setActiveRow(activeRow+1)
-  }
+    if (activeRow === 6) setMessage("All rows are filled");
+    if (!rowFull[activeRow]) return;
+    setActiveRow(activeRow + 1);
+  };
 
   return (
     <div className="solver-container">
       <div className="title">
         <h2>Wordle Solver</h2>
       </div>
+      <h5>{message}</h5>
       <div className="tip-suggestion-container">
         <div className="tips">tips over here</div>
         <div className="grid-container">
