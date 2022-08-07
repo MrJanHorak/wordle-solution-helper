@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 // components
 import SuggestWords from "../components/SuggestWords";
@@ -47,9 +47,12 @@ const Landing = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [message, setMessage] = useState("enter letters below");
   const [recievedWords, setRecievedWords] = useState(false);
+  const [mustNotContain, setMustNotContain] = useState([]);
   let inputArray = [];
   let cleanedList = [];
   let potentialWords = [];
+  let mustContain = [];
+  let atIndex = {};
 
   const onlyLetters = (str) => {
     return /^[a-zA-Z]{1,5}$/.test(str);
@@ -102,10 +105,17 @@ const Landing = () => {
   const findSuggestions = async (letters, priority) => {
 
     cleanedList = await cleanWordList(sourceWords);
+    priority.forEach((ele, index) => {
+      if (ele !== "") mustContain.push(letters[index].toLowerCase());
+      if (ele === "") mustNotContain.push(letters[index].toLowerCase());
+      if (ele[8] === "p") atIndex[index] = letters[index].toLowerCase();
+    });
+    console.log("MUST NOT CONTAIN:" ,mustNotContain)
     potentialWords = await getSuggestions(
       cleanedList,
-      letters,
-      priority
+      mustNotContain,
+      mustContain,
+      atIndex
     );
     setSuggestions(potentialWords);
     setRecievedWords(true);

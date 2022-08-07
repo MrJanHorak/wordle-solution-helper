@@ -1,16 +1,18 @@
-const getSuggestions = async (words, letters, highlighted) => {
-  let mustContain = [];
-  let mustNotContain = [];
-  let atIndex = {};
+const getSuggestions = async (words, mustNotContain,
+  mustContain,
+  atIndex) => {
+  // let mustContain = [];
+  // let mustNotContain = [];
+  // let atIndex = {};
   let potentialWordsA = [];
   let potentialWordsB = [];
   let potentialWordsC = [];
 
-  highlighted.forEach((ele, index) => {
-    if (ele !== "") mustContain.push(letters[index].toLowerCase());
-    if (ele === "") mustNotContain.push(letters[index].toLowerCase());
-    if (ele[8] === "p") atIndex[index] = letters[index].toLowerCase();
-  });
+  // highlighted.forEach((ele, index) => {
+  //   if (ele !== "") mustContain.push(letters[index].toLowerCase());
+  //   if (ele === "") mustNotContain.push(letters[index].toLowerCase());
+  //   if (ele[8] === "p") atIndex[index] = letters[index].toLowerCase();
+  // });
 
   console.log("Must Contain: ", mustContain);
   console.log("Must NOT Contain: ", mustNotContain);
