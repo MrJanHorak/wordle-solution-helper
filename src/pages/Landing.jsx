@@ -3,6 +3,13 @@ import React, { useEffect, useState } from "react";
 // components
 import SuggestWords from "../components/SuggestWords";
 
+// data
+import sourceWords from "../data/words_dictionary.json";
+
+//js
+import getSuggestions from "../js/getSuggestions";
+import cleanWordList from "../js/cleanWordList";
+
 // style
 import "../styles/Landing.css";
 
@@ -35,10 +42,14 @@ const Landing = () => {
   });
 
   const [activeRow, setActiveRow] = useState(0);
-  const [searchLetters, setSearchLetters] = useState([])
-  const [searchPriority, setSearchPriority] = useState([])
+  const [searchLetters, setSearchLetters] = useState([]);
+  const [searchPriority, setSearchPriority] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [message, setMessage] = useState("enter letters below");
+  const [recievedWords, setRecievedWords] = useState(false);
   let inputArray = [];
+  let cleanedList = [];
+  let potentialWords = [];
 
   const onlyLetters = (str) => {
     return /^[a-zA-Z]{1,5}$/.test(str);
@@ -74,17 +85,42 @@ const Landing = () => {
     }
   };
 
-  const handleButton = () => {
+  const handleButton = (e) => {
+    e.preventDefault()
     if (!rowFull[activeRow]) return;
+    setSearchLetters(letterArray[activeRow]);
+    setSearchPriority(squareClass[activeRow]);
+    setMessage("searching words");
+    setRecievedWords(false);
+    findSuggestions(letterArray[activeRow],squareClass[activeRow]);
     setActiveRow(activeRow + 1);
-    setSearchLetters(letterArray[activeRow])
-    setSearchPriority(squareClass[activeRow])
-    setMessage('searching words')
-    if (activeRow === 5) setMessage("All rows are filled")
-    if (activeRow<5) setMessage("enter letters below")
+
+    if (activeRow === 5) setMessage("All rows are filled");
+    if (activeRow < 5) setMessage("enter letters below");
   };
 
-  // useEffect(() =>{},[buttonPush])
+  const findSuggestions = async (letters, priority) => {
+    console.log("SENDING TO FIND WORDS: ",searchLetters, searchPriority)
+    cleanedList = await cleanWordList(sourceWords);
+    potentialWords = await getSuggestions(
+      cleanedList,
+      letters,
+      priority
+    );
+    setSuggestions(potentialWords);
+    setRecievedWords(true);
+  };
+
+  useEffect(() => {
+    const suggestedWords = () => {
+      if (recievedWords) {
+        setMessage("Suggestion found!");
+        return <SuggestWords potentialWords={potentialWords} />;
+      }
+    };
+    setSuggestions(suggestedWords());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recievedWords]);
 
   return (
     <div className="solver-container">
@@ -95,6 +131,7 @@ const Landing = () => {
       <div className="tip-suggestion-container">
         <div className="tips">tips over here</div>
         <div className="grid-container">
+          <form>
           <div
             className="row"
             id="row-one"
@@ -314,8 +351,11 @@ const Landing = () => {
           <div className="input-button">
             <button onClick={handleButton}>Look for Words</button>
           </div>
+          </form>
         </div>
-        <div className="word-suggestions"><SuggestWords letters={searchLetters} highlighted={searchPriority}/></div>
+        <div className="word-suggestions">
+          <SuggestWords />
+        </div>
       </div>
     </div>
   );
