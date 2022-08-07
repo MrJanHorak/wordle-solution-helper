@@ -4,7 +4,6 @@
 // Only 5 letter words are allowed
 
 const cleanWordList = (wordList) => {
-  console.log('cleaning word list')
 
   for (let word in wordList) {
     if (word.length !== 5) {

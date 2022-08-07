@@ -100,7 +100,7 @@ const Landing = () => {
   };
 
   const findSuggestions = async (letters, priority) => {
-    console.log("SENDING TO FIND WORDS: ",searchLetters, searchPriority)
+
     cleanedList = await cleanWordList(sourceWords);
     potentialWords = await getSuggestions(
       cleanedList,

@@ -1,5 +1,4 @@
 const getSuggestions = async (words, letters, highlighted) => {
-
   let mustContain = [];
   let mustNotContain = [];
   let atIndex = {};
@@ -7,13 +6,9 @@ const getSuggestions = async (words, letters, highlighted) => {
   let potentialWordsB = [];
   let potentialWordsC = [];
 
-  console.log("RECIEVED LETTERS: ", letters)
-  console.log("RECIEVED HIGHLIGHTS", highlighted)
-  console.log("RECIEVED WORDS", words)
-
   highlighted.forEach((ele, index) => {
-    if (ele !== "") mustContain.push(letters[index]);
-    if (ele === "") mustNotContain.push(letters[index]);
+    if (ele !== "") mustContain.push((letters[index].toLowerCase()));
+    if (ele === "") mustNotContain.push((letters[index].toLowerCase()));
     if (ele[8] === "p") atIndex[index] = letters[index];
   });
 
@@ -22,10 +17,12 @@ const getSuggestions = async (words, letters, highlighted) => {
   console.log("At Index: ", atIndex);
 
   for (let word in words) {
-    let wordSet = new Set(word.split(""));
-    let compareSet = [...wordSet].filter((letter) => !mustNotContain.includes(letter))
-  
-    if (compareSet.size === 0) {
+    let wordArray = word.split("");
+    let compareArray = mustNotContain.filter((letter) =>
+      wordArray.includes(letter)
+    );
+
+    if(compareArray.length===0){
       potentialWordsA.push(word);
     }
   }
