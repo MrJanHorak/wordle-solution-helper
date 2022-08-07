@@ -7,9 +7,9 @@ const getSuggestions = async (words, letters, highlighted) => {
   let potentialWordsC = [];
 
   highlighted.forEach((ele, index) => {
-    if (ele !== "") mustContain.push((letters[index].toLowerCase()));
-    if (ele === "") mustNotContain.push((letters[index].toLowerCase()));
-    if (ele[8] === "p") atIndex[index] = letters[index];
+    if (ele !== "") mustContain.push(letters[index].toLowerCase());
+    if (ele === "") mustNotContain.push(letters[index].toLowerCase());
+    if (ele[8] === "p") atIndex[index] = letters[index].toLowerCase();
   });
 
   console.log("Must Contain: ", mustContain);
@@ -22,7 +22,7 @@ const getSuggestions = async (words, letters, highlighted) => {
       wordArray.includes(letter)
     );
 
-    if(compareArray.length===0){
+    if (compareArray.length === 0) {
       potentialWordsA.push(word);
     }
   }
@@ -30,10 +30,11 @@ const getSuggestions = async (words, letters, highlighted) => {
   console.log("This many potential words found: ", potentialWordsA.length);
   console.log("potential words A: ", potentialWordsA);
 
-  for (let word in potentialWordsA) {
+  for (let w = 0; w < potentialWordsA.length; w++) {
+    let wordArray = potentialWordsA[w].split("");
     if (mustContain.length > 0) {
-      if (mustContain.every((letter) => word.includes(letter))) {
-        potentialWordsB.push(word);
+      if (mustContain.every((letter) => wordArray.includes(letter))) {
+        potentialWordsB.push(potentialWordsA[w]);
       }
     }
   }
@@ -41,10 +42,15 @@ const getSuggestions = async (words, letters, highlighted) => {
   console.log("This many potential words found: ", potentialWordsB.length);
   console.log("potential words B: ", potentialWordsB);
 
-  for (let word in potentialWordsB) {
-    for (let i = 0; i < word.length; i++) {
-      if (word[i] === atIndex[i] || atIndex[i] === undefined) {
-        potentialWordsC.push(word);
+  for (let x = 0; x < potentialWordsB.length; x++) {
+    let wordArray = potentialWordsB[x].split("");
+    let wordObject = {}
+    for (let i = 0; i < wordArray.length; i++) {
+      wordObject[i]=wordArray[i]
+    }
+    for (let indexNumber in atIndex){
+      if(wordObject[indexNumber]===atIndex[indexNumber]){
+        potentialWordsC.push(potentialWordsB[x])
       }
     }
   }
