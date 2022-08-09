@@ -6,8 +6,18 @@ const getSuggestions = async (
   wrongIndex
 ) => {
   console.log("MUST NOT CONTAIN: ", mustNotContain);
+  console.log("MUST CONTAIN: ", mustContain);
   console.log("AT INDEX: ", atIndex);
   console.log("WRONG INDEX: ", wrongIndex);
+
+  for (let i=0;i<mustNotContain.length;i++){
+    mustContain.includes(mustNotContain[i])
+    if(mustContain.includes(mustNotContain[i])){
+      let toRemove = mustNotContain.indexOf(mustNotContain[i])
+      mustNotContain.splice(toRemove,1)
+      i--
+    }
+  }
 
   let potentialWordsA = [];
   let potentialWordsB = [];
@@ -64,13 +74,20 @@ const getSuggestions = async (
       for (let x = 0; x < potentialWordsC.length; x++) {
         let wordArray = potentialWordsC[x].split("");
         let wordObject = {};
+        let allRightIndexes = [];
+
         for (let i = 0; i < wordArray.length; i++) {
           wordObject[i] = wordArray[i];
         }
+
         for (let indexNumber in atIndex) {
           if (wordObject[indexNumber] === atIndex[indexNumber]) {
-            potentialWordsD.push(potentialWordsC[x]);
+            allRightIndexes.push("yep");
           }
+        }
+
+        if (allRightIndexes.length === Object.keys(atIndex).length) {
+          potentialWordsD.push(potentialWordsC[x]);
         }
       }
     } else {
