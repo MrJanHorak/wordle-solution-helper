@@ -41,12 +41,13 @@ const getSuggestions = async (
     console.log("PotentialwordsB: ", potentialWordsB);
 
     for (let k = 0; k < potentialWordsB.length; k++) {
-      let wordArray = potentialWordsA[k].split("");
+      let wordArray = potentialWordsB[k].split("");
       let wordObject = {};
       let badIndex = false;
       for (let i = 0; i < wordArray.length; i++) {
         wordObject[i] = wordArray[i];
       }
+
       for (let indexNumber in wrongIndex) {
         if (wordObject[indexNumber] === wrongIndex[indexNumber]) {
           badIndex = true;
@@ -57,10 +58,6 @@ const getSuggestions = async (
       }
     }
 
-    console.log(
-      "# of Potential words with letter taking letters at wrong index into account: ",
-      potentialWordsC.length
-    );
     console.log("potential words C: ", potentialWordsC);
 
     if (Object.keys(atIndex).length !== 0) {
@@ -82,13 +79,10 @@ const getSuggestions = async (
   } else {
     potentialWordsD = potentialWordsA;
   }
-  console.log(
-    "# of Potential words with letter atIndex: ",
-    potentialWordsD.length
-  );
+
   console.log("potential words D: ", potentialWordsD);
 
-  return potentialWordsC;
+  return potentialWordsD;
 };
 
 export default getSuggestions;
