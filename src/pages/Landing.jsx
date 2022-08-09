@@ -52,7 +52,6 @@ const Landing = () => {
   let cleanedList = [];
   let potentialWords = [];
   let mustContain = [];
-  // let mustNotContain = [];
   let atIndex = {};
   let wrongIndex = {};
 
