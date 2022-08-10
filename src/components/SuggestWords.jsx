@@ -1,13 +1,39 @@
 import React from "react";
 
-const SuggestWords = ({  }) => {
- 
+// style
+import "../styles/SuggestWords.css";
+
+const SuggestWords = ({ suggestions }) => {
+  const suggestedWords = suggestions.map((word, i) => {
+    word = word.toUpperCase();
+    word = word.split("");
+    return (
+      <div className="suggestion-row" key={i}>
+        <div className={`suggestion-square `} id="10">
+          {word[0]}
+        </div>
+        <div className={`suggestion-square `} id="11">
+          {word[1]}
+        </div>
+        <div className={`suggestion-square `} id="12">
+          {word[2]}
+        </div>
+        <div className={`suggestion-square `} id="13">
+          {word[3]}
+        </div>
+        <div className={`suggestion-square `} id="14">
+          {word[4]}
+        </div>
+      </div>
+    );
+  });
 
   return (
-  <div className="suggestion-container">
-
-  here come suggested words!
-  </div>);
+    <div className="suggestion-container">
+      here come suggested words!
+      {suggestedWords}
+    </div>
+  );
 };
 
 export default SuggestWords;

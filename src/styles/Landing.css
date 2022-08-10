@@ -103,4 +103,6 @@ button:active {
 .word-suggestions {
   border: 2px solid #d3d6da;
   width: 300px;
+  height: 450px;
+  overflow: scroll;
 }

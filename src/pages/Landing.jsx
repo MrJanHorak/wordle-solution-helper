@@ -124,13 +124,13 @@ const Landing = () => {
   };
 
   useEffect(() => {
-    const suggestedWords = () => {
-      if (recievedWords) {
-        setMessage("Suggestion found!");
-        return <SuggestWords potentialWords={potentialWords} />;
-      }
-    };
-    setSuggestions(suggestedWords());
+    // const suggestedWords = () => {
+    //   if (recievedWords) {
+    //     setMessage("Suggestion found!");
+    //     return <SuggestWords suggestions={suggestions} />;
+    //   }
+    // };
+    // suggestedWords();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recievedWords]);
 
@@ -378,7 +378,7 @@ const Landing = () => {
           </form>
         </div>
         <div className="word-suggestions">
-          <SuggestWords />
+        <SuggestWords suggestions={suggestions} />
         </div>
       </div>
     </div>
