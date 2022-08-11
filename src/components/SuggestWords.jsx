@@ -30,7 +30,6 @@ const SuggestWords = ({ suggestions }) => {
 
   return (
     <div className="suggestion-container">
-      here come suggested words!
       {suggestedWords}
     </div>
   );
