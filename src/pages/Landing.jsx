@@ -45,7 +45,7 @@ const Landing = () => {
   const [searchLetters, setSearchLetters] = useState([]);
   const [searchPriority, setSearchPriority] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
-  const [message, setMessage] = useState("enter letters below");
+  const [message, setMessage] = useState("Enter your guess below.");
   const [recievedWords, setRecievedWords] = useState(false);
   const [mustNotContain, setMustNotContain] = useState([]);
   let inputArray = [];
@@ -74,18 +74,18 @@ const Landing = () => {
 
   const handleChange = (e) => {
     if (onlyLetters(e.target.value)) {
-      setMessage("enter letters below");
+      setMessage("Enter your guess below.");
       inputArray = e.target.value.toUpperCase().split("");
       if (inputArray.length === 5) {
         setRowFull({ ...rowFull, [activeRow]: true });
-        setMessage("now select letters");
+        setMessage("Click on lettters Wordle has highlighted.");
       }
       setLetterArray({ ...letterArray, [activeRow]: inputArray });
     } else {
       inputArray = [[], [], [], [], []];
       setLetterArray({ ...letterArray, [activeRow]: inputArray });
       e.target.value = "";
-      setMessage("oops you entered a number!");
+      setMessage("Oops you entered a number!");
     }
   };
 
@@ -94,13 +94,13 @@ const Landing = () => {
     if (!rowFull[activeRow]) return;
     setSearchLetters(letterArray[activeRow]);
     setSearchPriority(squareClass[activeRow]);
-    setMessage("searching words");
+    setMessage("Searching for possiblewords.");
     setRecievedWords(false);
     findSuggestions(letterArray[activeRow], squareClass[activeRow]);
     setActiveRow(activeRow + 1);
 
-    if (activeRow === 5) setMessage("All rows are filled");
-    if (activeRow < 5) setMessage("enter letters below");
+    if (activeRow === 5) setMessage("All rows are filled.");
+    if (activeRow < 5) setMessage("Enter your next guess below.");
   };
 
   const findSuggestions = async (letters, priority) => {
@@ -122,6 +122,24 @@ const Landing = () => {
     setSuggestions(potentialWords);
     setRecievedWords(true);
   };
+
+const startDrag =(e) =>{
+  e.dataTransfer.setData("drag-item");
+}
+  const dragOver = (e) => {
+    e.preventDefault();
+  }
+  
+  const drop = (e) => {
+    const droppedItem = e.dataTransfer.getData("drag-item");
+    if (droppedItem) {
+      // onItemDropped(droppedItem);
+    }
+  }
+
+  const handleDrop = (e) =>{
+    console.log(e)
+  }
 
   useEffect(() => {
     // const suggestedWords = () => {
@@ -186,6 +204,7 @@ const Landing = () => {
               className="row"
               id="row-two"
               onClick={activeRow === 1 ? handleClick : undefined}
+              onDrop={activeRow === 1 ? handleDrop : undefined}
             >
               {activeRow === 1 && (
                 <div
@@ -378,7 +397,7 @@ const Landing = () => {
           </form>
         </div>
         <div className="word-suggestions">
-        <SuggestWords suggestions={suggestions} />
+        <SuggestWords onDragStart={startDrag} suggestions={suggestions}/>
         </div>
       </div>
     </div>
