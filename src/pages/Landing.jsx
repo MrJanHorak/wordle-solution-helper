@@ -78,7 +78,7 @@ const Landing = () => {
       inputArray = e.target.value.toUpperCase().split("");
       if (inputArray.length === 5) {
         setRowFull({ ...rowFull, [activeRow]: true });
-        setMessage("Click on lettters Wordle has highlighted.");
+        setMessage("Click on letters Wordle has highlighted.");
       }
       setLetterArray({ ...letterArray, [activeRow]: inputArray });
     } else {
