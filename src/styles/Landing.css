@@ -131,3 +131,10 @@ button:active {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+ul {
+  font-size: 18px;
+  text-align: justify;
+  margin-right: 15px;
+  letter-spacing:-.1ch;
+}

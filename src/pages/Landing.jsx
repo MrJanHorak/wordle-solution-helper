@@ -397,7 +397,20 @@ const startDrag =(e) =>{
           </form>
         </div>
         <div className="word-suggestions">
+        {suggestions.length?
         <SuggestWords onDragStart={startDrag} suggestions={suggestions}/>
+          :<>
+          How to use the helper:
+          <ul>
+            <li>choose a starter word and enter it on Wordle</li>
+            <li>enter the same starter word here and click on any letters that wordle indicated in green or yellow.</li>
+            <li>one click turns a letter yellow and means correct letter at wrong position.</li>
+            <li>a second click turns a letter green and means correct letter and correct spot in target word.</li>
+            <li>to recieve suggestions click the button and browse through suggestions.</li>
+
+          </ul>
+          </>
+          }
         </div>
       </div>
     </div>
