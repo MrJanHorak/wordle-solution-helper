@@ -1,5 +1,11 @@
 # Wordle - (helper) - Solver
 
+![Imgur](https://i.imgur.com/KmqLgu2l.png)
+![Imgur](https://i.imgur.com/nqNLFI4m.png)
+![Imgur](https://i.imgur.com/6ZrUBsZm.png)
+![Imgur](https://i.imgur.com/dbhx2Jym.png)
+
+
 After creating apps to help solve the New York Times Letter Boxed and Spelling Bee word games, I decided I should go ahead and complete the list and design a Wordle solution app.
 
 As I begin this app, my intention is to create a solution helper that will emulate the look of Wordle and give suggestions based upon the given letters.
