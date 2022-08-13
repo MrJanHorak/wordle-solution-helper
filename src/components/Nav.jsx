@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import DarkMode from "../components/DarkMode";
 import { MdClose } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
+import { CgBee } from "react-icons/cg";
+import { BsBoundingBoxCircles, BsGrid3X3 } from "react-icons/bs";
 
 const Nav = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -28,6 +30,7 @@ const Nav = () => {
             )}
           </button>
           <ul className={`menuNav ${navbarOpen ? "showMenu" : ""}`}>
+            <li>&nbsp;</li>
             <li>
               <a
                 href="https://example.com"
@@ -35,7 +38,7 @@ const Nav = () => {
                 target="_blank"
                 onClick={() => closeMenu()}
               >
-                Wordle Helper
+                {<BsGrid3X3 />} &nbsp;Wordle Helper
               </a>
             </li>
             <li>
@@ -46,7 +49,7 @@ const Nav = () => {
                 target="_blank"
                 onClick={() => closeMenu()}
               >
-                Spelling Bee Solver
+                {<CgBee />} &nbsp;Spelling Bee Solver
               </a>
             </li>
             <li>
@@ -57,7 +60,7 @@ const Nav = () => {
                 rel="noreferrer"
                 onClick={() => closeMenu()}
               >
-                Letter Boxed Solver
+                {<BsBoundingBoxCircles />} &nbsp;Letter Boxed Solver
               </a>
             </li>
           </ul>

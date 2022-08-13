@@ -48,6 +48,45 @@
   display: none;
 }
 
+.slider {
+  background-color: var(--font-color);
+  position: relative;
+  cursor: pointer;
+  top: 10px;
+  height: 26px;
+  width: 52px;
+  transition: 0.2s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  background-color: var(--slider-color);
+  bottom: 0px;
+  content: "";
+  height: 26px;
+  left: 0px;
+  position: absolute;
+  transition: 0.4s;
+  width: 26px;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+input:checked + .slider {
+  background-color: cornflowerblue;
+}
+
+.slider.round {
+  border-radius: 34px;
+  width: 52px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 a {
   color: var(--link-color);
 }
@@ -70,7 +109,6 @@ a {
 .App-link {
   color: #61dafb;
 }
-
 
 #nav-bar {
   display: flex;
@@ -109,7 +147,8 @@ a {
 /* sidebar Nav */
 
 .hamburger-button {
-  margin-top: 10px;
+  margin-top: 6px;
+  left: -65px;
   color: var(--font-color);
   transition: 250ms;
 }
@@ -120,7 +159,9 @@ a {
   text-decoration: none;
   color: var(--font-color);
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: small;
+  text-align: left;
 }
 
 .navBar {
@@ -145,14 +186,14 @@ a {
   background: rgba(127, 127, 127, 0.88);
   left: -44px;
   bottom: 0;
-  height: 295px;
+  height: 215px;
   width: 0;
   overflow: hidden;
-  max-width: 140px;
+  max-width: 180px;
   z-index: 9;
   border-radius: 12px;
   box-shadow: 1.5px 1.5px 3px;
-  transition: width 250ms;
+  transition: width 150ms;
 }
 
 .menuNav.showMenu {
@@ -164,7 +205,7 @@ a {
   margin-top: 2.4rem;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 1029px) {
   #nav-bar {
     display: none;
   }
@@ -178,4 +219,3 @@ a {
     display: inline;
   }
 }
-
