@@ -132,7 +132,13 @@ button:active {
   background: #555;
 }
 
+h6{
+  font-size: .6em;
+  margin: 12px;
+}
+
 ul {
+  margin-top: 0;
   font-size: 18px;
   text-align: justify;
   margin-right: 15px;

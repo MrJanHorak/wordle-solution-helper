@@ -5,17 +5,12 @@ const getSuggestions = async (
   atIndex,
   wrongIndex
 ) => {
-  console.log("MUST NOT CONTAIN: ", mustNotContain);
-  console.log("MUST CONTAIN: ", mustContain);
-  console.log("AT INDEX: ", atIndex);
-  console.log("WRONG INDEX: ", wrongIndex);
-
-  for (let i=0;i<mustNotContain.length;i++){
-    mustContain.includes(mustNotContain[i])
-    if(mustContain.includes(mustNotContain[i])){
-      let toRemove = mustNotContain.indexOf(mustNotContain[i])
-      mustNotContain.splice(toRemove,1)
-      i--
+  for (let i = 0; i < mustNotContain.length; i++) {
+    mustContain.includes(mustNotContain[i]);
+    if (mustContain.includes(mustNotContain[i])) {
+      let toRemove = mustNotContain.indexOf(mustNotContain[i]);
+      mustNotContain.splice(toRemove, 1);
+      i--;
     }
   }
 
@@ -35,8 +30,6 @@ const getSuggestions = async (
     }
   }
 
-  console.log("This many potential words found: ", potentialWordsA.length);
-
   if (mustContain.length > 0) {
     for (let w = 0; w < potentialWordsA.length; w++) {
       let wordArray = potentialWordsA[w].split("");
@@ -46,9 +39,6 @@ const getSuggestions = async (
         }
       }
     }
-
-    console.log("This many potential words found: ", potentialWordsB.length);
-    console.log("PotentialwordsB: ", potentialWordsB);
 
     for (let k = 0; k < potentialWordsB.length; k++) {
       let wordArray = potentialWordsB[k].split("");
@@ -67,8 +57,6 @@ const getSuggestions = async (
         potentialWordsC.push(potentialWordsB[k]);
       }
     }
-
-    console.log("potential words C: ", potentialWordsC);
 
     if (Object.keys(atIndex).length !== 0) {
       for (let x = 0; x < potentialWordsC.length; x++) {
@@ -96,8 +84,6 @@ const getSuggestions = async (
   } else {
     potentialWordsD = potentialWordsA;
   }
-
-  console.log("potential words D: ", potentialWordsD);
 
   return potentialWordsD;
 };

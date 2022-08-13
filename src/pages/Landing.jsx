@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // components
 import SuggestWords from "../components/SuggestWords";
+import InfoScreen from "../components/InfoScreen";
 
 // data
 import sourceWords from "../data/words_dictionary.json";
@@ -42,12 +43,10 @@ const Landing = () => {
   });
 
   const [activeRow, setActiveRow] = useState(0);
-  const [searchLetters, setSearchLetters] = useState([]);
-  const [searchPriority, setSearchPriority] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [message, setMessage] = useState("Enter your guess below.");
-  const [recievedWords, setRecievedWords] = useState(false);
-  const [mustNotContain, setMustNotContain] = useState([]);
+
+  let mustNotContain = [];
   let inputArray = [];
   let cleanedList = [];
   let potentialWords = [];
@@ -92,10 +91,7 @@ const Landing = () => {
   const handleButton = (e) => {
     e.preventDefault();
     if (!rowFull[activeRow]) return;
-    setSearchLetters(letterArray[activeRow]);
-    setSearchPriority(squareClass[activeRow]);
     setMessage("Searching for possiblewords.");
-    setRecievedWords(false);
     findSuggestions(letterArray[activeRow], squareClass[activeRow]);
     setActiveRow(activeRow + 1);
 
@@ -120,46 +116,18 @@ const Landing = () => {
       wrongIndex
     );
     setSuggestions(potentialWords);
-    setRecievedWords(true);
   };
-
-const startDrag =(e) =>{
-  e.dataTransfer.setData("drag-item");
-}
-  const dragOver = (e) => {
-    e.preventDefault();
-  }
-  
-  const drop = (e) => {
-    const droppedItem = e.dataTransfer.getData("drag-item");
-    if (droppedItem) {
-      // onItemDropped(droppedItem);
-    }
-  }
-
-  const handleDrop = (e) =>{
-    console.log(e)
-  }
-
-  useEffect(() => {
-    // const suggestedWords = () => {
-    //   if (recievedWords) {
-    //     setMessage("Suggestion found!");
-    //     return <SuggestWords suggestions={suggestions} />;
-    //   }
-    // };
-    // suggestedWords();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recievedWords]);
 
   return (
     <div className="solver-container">
       <div className="title">
-        <h2>Wordle Solver</h2>
+        <h2>Wordle Helper</h2>
       </div>
       <h5>{message}</h5>
       <div className="tip-suggestion-container">
-        <div className="tips">tips over here</div>
+        <div className="tips">
+          <InfoScreen />
+        </div>
         <div className="grid-container">
           <form>
             <div
@@ -204,7 +172,6 @@ const startDrag =(e) =>{
               className="row"
               id="row-two"
               onClick={activeRow === 1 ? handleClick : undefined}
-              onDrop={activeRow === 1 ? handleDrop : undefined}
             >
               {activeRow === 1 && (
                 <div
@@ -397,20 +364,32 @@ const startDrag =(e) =>{
           </form>
         </div>
         <div className="word-suggestions">
-        {suggestions.length?
-        <SuggestWords onDragStart={startDrag} suggestions={suggestions}/>
-          :<>
-          How to use the helper:
-          <ul>
-            <li>choose a starter word and enter it on Wordle</li>
-            <li>enter the same starter word here and click on any letters that wordle indicated in green or yellow.</li>
-            <li>one click turns a letter yellow and means correct letter at wrong position.</li>
-            <li>a second click turns a letter green and means correct letter and correct spot in target word.</li>
-            <li>to recieve suggestions click the button and browse through suggestions.</li>
-
-          </ul>
-          </>
-          }
+          {suggestions.length ? (
+            <SuggestWords suggestions={suggestions} />
+          ) : (
+            <>
+              <h6>Welcome to the Wordle helper!</h6>
+              <ul>
+                <li>choose a starter word and enter it on Wordle</li>
+                <li>
+                  enter the same starter word here and click on any letters that
+                  wordle indicated in green or yellow.
+                </li>
+                <li>
+                  one click turns a letter yellow and means correct letter at
+                  wrong position.
+                </li>
+                <li>
+                  a second click turns a letter green and means correct letter
+                  and correct spot in target word.
+                </li>
+                <li>
+                  to recieve suggestions click the button and browse through
+                  suggestions.
+                </li>
+              </ul>
+            </>
+          )}
         </div>
       </div>
     </div>

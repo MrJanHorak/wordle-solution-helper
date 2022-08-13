@@ -8,7 +8,7 @@ const SuggestWords = ({ suggestions }) => {
     word = word.toUpperCase();
     word = word.split("");
     return (
-      <div className="suggestion-row" key={i}  draggable>
+      <div className="suggestion-row" key={i} draggable>
         <div className={`suggestion-square `} id="10">
           {word[0]}
         </div>
@@ -28,11 +28,7 @@ const SuggestWords = ({ suggestions }) => {
     );
   });
 
-  return (
-    <div className="suggestion-container">
-      {suggestedWords}
-    </div>
-  );
+  return <div className="suggestion-container">{suggestedWords}</div>;
 };
 
 export default SuggestWords;
