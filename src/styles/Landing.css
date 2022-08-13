@@ -20,6 +20,19 @@ button:active {
   background-color: #787c7f;
 }
 
+h6{
+  font-size: .6em;
+  margin: 12px;
+}
+
+ul {
+  margin-top: 0;
+  font-size: 18px;
+  text-align: justify;
+  margin-right: 15px;
+  letter-spacing:-.1ch;
+}
+
 /* input {
   text-align: center;
   border-color:#f7da21 ;
@@ -97,13 +110,10 @@ button:active {
 
 .tips {
   border: 2px solid #d3d6da;
-  width: 300px;
 }
 
 .word-suggestions {
   border: 2px solid #d3d6da;
-  width: 300px;
-  height: 450px;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
@@ -132,15 +142,52 @@ button:active {
   background: #555;
 }
 
-h6{
-  font-size: .6em;
-  margin: 12px;
+@media screen and (max-width: 970px){
+  h2{
+    margin:0;
+  }
+
+  h5{
+    margin: 5px 0 5px 0;
+  }
+
+  .tip-suggestion-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tips {
+    display: none;
+    flex-direction: column;
+    border: 2px solid #d3d6da;
+    width: 328px;
+    align-items: center;
+    justify-items: center;
+    background-color: #787c7f;
+    margin: 0 0 18px 0;
+  }
+
+  .word-suggestions {
+    width: 328px;
+    min-height: auto;
+    max-height: 395px;
+    margin-bottom: 8px;
+  }  
 }
 
-ul {
-  margin-top: 0;
-  font-size: 18px;
-  text-align: justify;
-  margin-right: 15px;
-  letter-spacing:-.1ch;
+@media screen and (min-width: 971px){
+
+  .word-suggestions {
+    width: 328px;
+    max-height: 450px;
+  } 
+
+  .tips {
+    display: flex;
+    justify-content: center;
+    max-height: 100%;
+    flex-direction: column;
+    width: 300px;
+  }
 }
