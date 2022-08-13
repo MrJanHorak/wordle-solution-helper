@@ -1,0 +1,33 @@
+.info-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.starter-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 278px;
+  height: 45px;
+  margin:  7px 1px 7px 1px;
+}
+
+.suggestion-row:hover {
+  background-color: yellow;
+}
+
+.suggestion-square {
+  height: 45px;
+  width: 45px;
+  font-size: 23px;
+  border: 2px solid #d3d6da;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 800;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}

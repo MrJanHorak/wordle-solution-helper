@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 // data
 import starterWords from "../data/starter-words";
 
+// style
+import "../styles/StarterWords.css";
+
 const InfoScreen = () => {
   const [suggestedStarters, setSuggestedStarters] = useState([]);
 
@@ -16,7 +19,7 @@ const InfoScreen = () => {
   }, []);
 
   const starters = suggestedStarters.map((word, i) => (
-    <div className="suggestion-row" key={i}>
+    <div className="starter-row" key={i}>
       <div className={`suggestion-square `} id="10">
         {word[0]}
       </div>

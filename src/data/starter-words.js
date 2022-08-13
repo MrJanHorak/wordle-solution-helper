@@ -14,7 +14,6 @@ const starterWords = [
   "TRICE",
   "ROAST",
   "ADIEU",
-  "ROATE",
   "TRAIN",
   "CLOSE",
   "STORY",
