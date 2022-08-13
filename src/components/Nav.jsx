@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 // Components
 import DarkMode from "../components/DarkMode";
@@ -30,36 +29,66 @@ const Nav = () => {
           </button>
           <ul className={`menuNav ${navbarOpen ? "showMenu" : ""}`}>
             <li>
-              <Link to={{ pathname: "https://example.com" }} target="_blank" onClick={() => closeMenu()}>
+              <a
+                href="https://example.com"
+                rel="noreferrer"
+                target="_blank"
+                onClick={() => closeMenu()}
+              >
                 Wordle Helper
-              </Link>
+              </a>
             </li>
             <li>
               {" "}
-              <Link to={{ pathname: "https://example.com" }} target="_blank" onClick={() => closeMenu()}>
+              <a
+                href="https://spelling-bee-word-puzzle-solver.netlify.app/"
+                rel="noreferrer"
+                target="_blank"
+                onClick={() => closeMenu()}
+              >
                 Spelling Bee Solver
-              </Link>
+              </a>
             </li>
             <li>
               {" "}
-              <Link to={{ pathname: "https://example.com" }} target="_blank" onClick={() => closeMenu()}>
+              <a
+                href="https://letter-boxed-solver.netlify.app/"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => closeMenu()}
+              >
                 Letter Boxed Solver
-              </Link>
+              </a>
             </li>
           </ul>
         </nav>
       </div>
       <div id="nav-bar">
         <nav className="nav-bar">
-          <Link className="button " to={{ pathname: "https://example.com" }} target="_blank">
+          <a
+            className="button "
+            href="https://example.com"
+            rel="noreferrer"
+            target="_blank"
+          >
             <span>Wordle Helper</span>
-          </Link>
-          <Link className="button " to={{ pathname: "https://example.com" }} target="_blank">
+          </a>
+          <a
+            className="button "
+            href="https://spelling-bee-word-puzzle-solver.netlify.app/"
+            rel="noreferrer"
+            target="_blank"
+          >
             <span>Spelling Bee Solver</span>
-          </Link>
-          <Link className="button " to={{ pathname: "https://example.com" }} target="_blank">
+          </a>
+          <a
+            className="button "
+            href="https://letter-boxed-solver.netlify.app/"
+            rel="noreferrer"
+            target="_blank"
+          >
             <span>Letter Boxed Solver</span>
-          </Link>
+          </a>
         </nav>
       </div>
       <DarkMode />

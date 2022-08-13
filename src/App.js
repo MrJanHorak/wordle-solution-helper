@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
 
 // pages
 import Landing from "./pages/Landing";
@@ -13,14 +12,12 @@ import "../src/styles/App.css";
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Nav />
-        <div className="App">
-          <header className="App-header">
-            <Landing />
-          </header>
-        </div>
-      </BrowserRouter>
+      <Nav />
+      <div className="App">
+        <header className="App-header">
+          <Landing />
+        </header>
+      </div>
     </>
   );
 }
