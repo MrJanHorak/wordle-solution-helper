@@ -45,14 +45,14 @@ const Landing = () => {
   const [activeRow, setActiveRow] = useState(0);
   const [suggestions, setSuggestions] = useState([]);
   const [message, setMessage] = useState("Enter your guess below.");
-
-  let mustNotContain = [];
+  const [mustNotContain, setMustNotContain] = useState([]);
+  const [mustContain, setMustContain] = useState([]);
+  
+  let atIndex = {};
+  let wrongIndex = {};
   let inputArray = [];
   let cleanedList = [];
   let potentialWords = [];
-  let mustContain = [];
-  let atIndex = {};
-  let wrongIndex = {};
 
   const onlyLetters = (str) => {
     return /^[a-zA-Z]{1,5}$/.test(str);
@@ -102,9 +102,9 @@ const Landing = () => {
   const findSuggestions = async (letters, priority) => {
     cleanedList = await cleanWordList(sourceWords);
     priority.forEach((ele, index) => {
-      if (ele !== "") mustContain.push(letters[index].toLowerCase());
-      if (ele === "") mustNotContain.push(letters[index].toLowerCase());
-      if (ele[8] === "p") atIndex[index] = letters[index].toLowerCase();
+      if (ele !== "" ) mustContain.push(letters[index].toLowerCase());
+      if (ele === "" ) mustNotContain.push(letters[index].toLowerCase());
+      if (ele[8] === "p" && atIndex!==letters[index] ) atIndex[index] = letters[index].toLowerCase();
       if (ele[8] === "l") wrongIndex[index] = letters[index].toLowerCase();
     });
 
