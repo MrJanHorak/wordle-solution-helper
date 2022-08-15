@@ -22,7 +22,11 @@ const Nav = () => {
     <>
       <div id="humburger">
         <nav className="navBar">
-          <button className="hamburger-button" onClick={handleToggle}>
+          <button
+            className="hamburger-button"
+            aria-label="menu"
+            onClick={handleToggle}
+          >
             {navbarOpen ? (
               <MdClose style={{ width: "40px", height: "40px" }} />
             ) : (
@@ -33,9 +37,10 @@ const Nav = () => {
             <li>&nbsp;</li>
             <li>
               <a
-                href="https://example.com"
+                href="https://wordle-solving-helper.netlify.app/"
                 rel="noreferrer"
                 target="_blank"
+                aria-label="wordle helper"
                 onClick={() => closeMenu()}
               >
                 {<BsGrid3X3 />} &nbsp;Wordle Helper
@@ -47,6 +52,7 @@ const Nav = () => {
                 href="https://spelling-bee-word-puzzle-solver.netlify.app/"
                 rel="noreferrer"
                 target="_blank"
+                aria-label="spelling bee puzzle solver"
                 onClick={() => closeMenu()}
               >
                 {<CgBee />} &nbsp;Spelling Bee Solver
@@ -58,6 +64,7 @@ const Nav = () => {
                 href="https://letter-boxed-solver.netlify.app/"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="letter boxed solver"
                 onClick={() => closeMenu()}
               >
                 {<BsBoundingBoxCircles />} &nbsp;Letter Boxed Solver
@@ -70,9 +77,10 @@ const Nav = () => {
         <nav className="nav-bar">
           <a
             className="button "
-            href="https://example.com"
+            href="https://wordle-solving-helper.netlify.app/"
             rel="noreferrer"
             target="_blank"
+            aria-label="wordle helper"
           >
             <span>Wordle Helper</span>
           </a>
@@ -81,6 +89,7 @@ const Nav = () => {
             href="https://spelling-bee-word-puzzle-solver.netlify.app/"
             rel="noreferrer"
             target="_blank"
+            aria-label="spelling bee puzzle solver"
           >
             <span>Spelling Bee Solver</span>
           </a>
@@ -89,6 +98,7 @@ const Nav = () => {
             href="https://letter-boxed-solver.netlify.app/"
             rel="noreferrer"
             target="_blank"
+            aria-label="letter boxed solver"
           >
             <span>Letter Boxed Solver</span>
           </a>

@@ -124,9 +124,9 @@ const Landing = () => {
   return (
     <div className="solver-container">
       <div className="title">
-        <h2>Wordle Helper</h2>
+        <h1>Wordle Helper</h1>
       </div>
-      <h5>{message}</h5>
+      <h2>{message}</h2>
       <div className="tip-suggestion-container">
         <div className="tips">
           <InfoScreen />
@@ -152,6 +152,7 @@ const Landing = () => {
                     autoComplete="off"
                     onChange={activeRow === 0 ? handleChange : undefined}
                     spellCheck="false"
+                    aria-label="input word"
                   />
                 </div>
               )}
@@ -362,7 +363,9 @@ const Landing = () => {
               </div>
             </div>
             <div className="input-button">
-              <button onClick={handleButton}>Look for Words</button>
+              <button onClick={handleButton} aria-label="look for words">
+                Look for Words
+              </button>
             </div>
           </form>
         </div>
@@ -371,7 +374,7 @@ const Landing = () => {
             <SuggestWords suggestions={suggestions} />
           ) : (
             <>
-              <h6>Welcome to the Wordle helper!</h6>
+              <h3>Welcome to the Wordle helper!</h3>
               <ul>
                 <li>choose a starter word and enter it on Wordle</li>
                 <li>
