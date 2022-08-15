@@ -6,10 +6,6 @@ const getSuggestions = async (
   wrongIndex
 ) => {
 
-  // console.log('MUST NOT CONTAIN: ', mustNotContain)
-  // console.log('MUST CONTAIN: ', mustContain)
-  // console.log('atIndex: ', mustContain)
-
   for (let i = 0; i < mustNotContain.length; i++) {
     mustContain.includes(mustNotContain[i]);
     if (mustContain.includes(mustNotContain[i])) {

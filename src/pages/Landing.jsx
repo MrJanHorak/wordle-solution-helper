@@ -47,7 +47,6 @@ const Landing = () => {
   const [message, setMessage] = useState("Enter your guess below.");
   const [mustNotContain, setMustNotContain] = useState([]);
   const [mustContain, setMustContain] = useState([]);
-  
   let atIndex = {};
   let wrongIndex = {};
   let inputArray = [];
@@ -102,9 +101,11 @@ const Landing = () => {
   const findSuggestions = async (letters, priority) => {
     cleanedList = await cleanWordList(sourceWords);
     priority.forEach((ele, index) => {
-      if (ele !== "" ) mustContain.push(letters[index].toLowerCase());
-      if (ele === "" ) mustNotContain.push(letters[index].toLowerCase());
-      if (ele[8] === "p" && atIndex!==letters[index] ) atIndex[index] = letters[index].toLowerCase();
+      if (ele !== "" && !mustContain.includes(letters[index].toLowerCase()))
+        mustContain.push(letters[index].toLowerCase());
+      if (ele === "" && !mustNotContain.includes(letters[index].toLowerCase()))
+        mustNotContain.push(letters[index].toLowerCase());
+      if (ele[8] === "p") atIndex[index] = letters[index].toLowerCase();
       if (ele[8] === "l") wrongIndex[index] = letters[index].toLowerCase();
     });
 
@@ -116,6 +117,8 @@ const Landing = () => {
       wrongIndex
     );
     setSuggestions(potentialWords);
+    setMustContain(mustContain);
+    setMustNotContain(mustNotContain);
   };
 
   return (
