@@ -3,6 +3,18 @@ body {
   color: var(--font-color);
 }
 
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
 button {
   margin-top: 12px;
   width: 190px;
