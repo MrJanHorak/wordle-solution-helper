@@ -5,11 +5,10 @@ import SuggestWords from "../components/SuggestWords";
 import InfoScreen from "../components/InfoScreen";
 
 // data
-import sourceWords from "../data/words_dictionary.json";
+import sourceWords from "../data/wordle-words.json";
 
 //js
 import getSuggestions from "../js/getSuggestions";
-import cleanWordList from "../js/cleanWordList";
 
 // style
 import "../styles/Landing.css";
@@ -99,7 +98,7 @@ const Landing = () => {
   };
 
   const findSuggestions = async (letters, priority) => {
-    cleanedList = await cleanWordList(sourceWords);
+    cleanedList = sourceWords;
     priority.forEach((ele, index) => {
       if (ele !== "" && !mustContain.includes(letters[index].toLowerCase()))
         mustContain.push(letters[index].toLowerCase());
