@@ -41,13 +41,20 @@ const Landing = () => {
     5: false,
   });
 
+  const [wrongIndex, setWrongIndex] = useState({
+    0: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+  });
+
   const [activeRow, setActiveRow] = useState(0);
   const [suggestions, setSuggestions] = useState([]);
   const [message, setMessage] = useState("Enter your guess below.");
   const [mustNotContain, setMustNotContain] = useState([]);
   const [mustContain, setMustContain] = useState([]);
   let atIndex = {};
-  let wrongIndex = {};
   let inputArray = [];
   let cleanedList = [];
   let potentialWords = [];
@@ -105,7 +112,7 @@ const Landing = () => {
       if (ele === "" && !mustNotContain.includes(letters[index].toLowerCase()))
         mustNotContain.push(letters[index].toLowerCase());
       if (ele[8] === "p") atIndex[index] = letters[index].toLowerCase();
-      if (ele[8] === "l") wrongIndex[index] = letters[index].toLowerCase();
+      if (ele[8] === "l") wrongIndex[index].push(letters[index].toLowerCase());
     });
 
     potentialWords = await getSuggestions(
@@ -115,6 +122,8 @@ const Landing = () => {
       atIndex,
       wrongIndex
     );
+
+    setWrongIndex(wrongIndex);
     setSuggestions(potentialWords);
     setMustContain(mustContain);
     setMustNotContain(mustNotContain);

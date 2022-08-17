@@ -20,6 +20,8 @@ const getSuggestions = async (
   let potentialWordsC = [];
   let potentialWordsD = [];
 
+  // first filer out words with letters not occuring in target word
+
   for (let word in words) {
     let wordArray = word.split("");
     let compareArray = mustNotContain.filter((letter) =>
@@ -30,6 +32,9 @@ const getSuggestions = async (
       potentialWordsA.push(word);
     }
   }
+
+  // filter to ensure only words containing
+  // all current guessed letters are present in the word
 
   if (mustContain.length > 0) {
     for (let w = 0; w < potentialWordsA.length; w++) {
@@ -50,14 +55,18 @@ const getSuggestions = async (
       }
 
       for (let indexNumber in wrongIndex) {
-        if (wordObject[indexNumber] === wrongIndex[indexNumber]) {
-          badIndex = true;
+        for (let w = 0; w < wrongIndex[indexNumber].length; w++) {
+          if (wordObject[indexNumber] === wrongIndex[indexNumber][w]) {
+            badIndex = true;
+          }
         }
       }
       if (badIndex === false) {
         potentialWordsC.push(potentialWordsB[k]);
       }
     }
+
+    // filter words with known correct placed guessed letters
 
     if (Object.keys(atIndex).length !== 0) {
       for (let x = 0; x < potentialWordsC.length; x++) {
