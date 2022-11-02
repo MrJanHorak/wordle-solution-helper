@@ -9,10 +9,28 @@
       name="description"
       content="A wordle solving tool. Enter the letters you have tried on Wordle. Then indicate if a letter is included in the word or not and if it is located in the proper position or not. Suggestions will be made based upon each letters placement and priority."
     />
-    <meta name="image" property="og:image" content="https://imgur.com/KmqLgu2">
-    <meta name="author" content="Jan Horak">
+    <meta
+      name="image"
+      property="og:image"
+      content="https://imgur.com/KmqLgu2"
+    />
+    <meta name="author" content="Jan Horak" />
 
     <title>Wordle Helper</title>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-M4FJ7FX2CH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-M4FJ7FX2CH");
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
