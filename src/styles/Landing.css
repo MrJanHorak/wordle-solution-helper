@@ -116,6 +116,7 @@ ul {
 .tip-suggestion-container {
   display: flex;
   flex-direction: row;
+  margin-bottom: 20px;
 }
 
 .tips {

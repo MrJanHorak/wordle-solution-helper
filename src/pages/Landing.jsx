@@ -7,6 +7,7 @@ import InfoScreen from "../components/InfoScreen";
 // data
 import sourceWords from "../data/wordle-words.json";
 
+
 //js
 import getSuggestions from "../js/getSuggestions";
 
@@ -54,6 +55,7 @@ const Landing = () => {
   const [message, setMessage] = useState("Enter your guess below.");
   const [mustNotContain, setMustNotContain] = useState([]);
   const [mustContain, setMustContain] = useState([]);
+
   let atIndex = {};
   let inputArray = [];
   let cleanedList = [];
@@ -400,6 +402,9 @@ const Landing = () => {
                 <li>
                   to recieve suggestions click the button and browse through
                   suggestions.
+                </li>
+                <li>
+                  greyed out words are words that have been used in previous Wordles
                 </li>
               </ul>
             </>
