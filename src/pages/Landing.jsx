@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // components
 import SuggestWords from "../components/SuggestWords";
@@ -6,7 +6,7 @@ import InfoScreen from "../components/InfoScreen";
 
 // data
 import sourceWords from "../data/wordle-words.json";
-
+import pastWordles from "../data/pastWordles.json";
 
 //js
 import getSuggestions from "../js/getSuggestions";
@@ -55,11 +55,36 @@ const Landing = () => {
   const [message, setMessage] = useState("Enter your guess below.");
   const [mustNotContain, setMustNotContain] = useState([]);
   const [mustContain, setMustContain] = useState([]);
+  const [pastSolutions, setPastSolutions] = useState([])
 
   let atIndex = {};
   let inputArray = [];
   let cleanedList = [];
   let potentialWords = [];
+
+  useEffect(() => {
+    fetch('https://us-central1-wordlesolverbe.cloudfunctions.net/api/scrapeWords')
+      .then(response => response.json())
+      .then(data => {
+        processPastWordles(data)
+      })
+      .catch(error => {
+        console.error('Error:', error)
+        processPastWordles(pastWordles) // Use local data if fetch fails
+      });
+  }, [suggestions])
+
+  const processPastWordles = (data) => {
+    let pastWordleSolutions = []
+    if (suggestions.length > 0) {
+      for (let i = 0; i < suggestions.length; i++) {
+        if (data[suggestions[i].toUpperCase()] === 1) {
+          pastWordleSolutions.push(suggestions[i])
+        }
+      }
+    }
+    setPastSolutions(pastWordleSolutions)
+  }
 
   const onlyLetters = (str) => {
     return /^[a-zA-Z]{1,5}$/.test(str);
@@ -122,7 +147,7 @@ const Landing = () => {
       mustNotContain,
       mustContain,
       atIndex,
-      wrongIndex
+      wrongIndex,
     );
 
     setWrongIndex(wrongIndex);
@@ -130,6 +155,8 @@ const Landing = () => {
     setMustContain(mustContain);
     setMustNotContain(mustNotContain);
   };
+
+  
 
   return (
     <div className="solver-container">
@@ -381,7 +408,7 @@ const Landing = () => {
         </div>
         <div className="word-suggestions">
           {suggestions.length ? (
-            <SuggestWords suggestions={suggestions} />
+            <SuggestWords suggestions={suggestions} pastSolutions={pastSolutions} />
           ) : (
             <>
               <h3>Welcome to the Wordle helper!</h3>

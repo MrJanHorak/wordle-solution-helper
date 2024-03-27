@@ -1,25 +1,9 @@
-import React, { useState, useEffect } from 'react'
-
-//data
-import pastWordles from '../data/pastWordles.json'
+import React, { useEffect } from 'react'
 
 // style
 import '../styles/SuggestWords.css'
 
-const SuggestWords = ({ suggestions }) => {
-  const [pastSolutions, setPastSolutions] = useState([])
-
-  useEffect(() => {
-    let pastWordleSolutions = []
-    if (suggestions.length > 0) {
-      for (let i = 0; i < suggestions.length; i++) {
-        if (pastWordles[suggestions[i].toUpperCase()] === 1) {
-          pastWordleSolutions.push(suggestions[i])
-        }
-      }
-    }
-    setPastSolutions(pastWordleSolutions)
-  }, [suggestions])
+const SuggestWords = ({ suggestions, pastSolutions }) => {
 
   useEffect(() => {}, [pastSolutions])
   console.log(pastSolutions)
