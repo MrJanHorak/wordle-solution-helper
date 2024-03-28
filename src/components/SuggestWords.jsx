@@ -3,15 +3,25 @@ import React, { useEffect } from 'react'
 // style
 import '../styles/SuggestWords.css'
 
-const SuggestWords = ({ suggestions, pastSolutions }) => {
-
+const SuggestWords = ({
+  suggestions,
+  pastSolutions,
+  revealWords,
+  hidePastWordles
+}) => {
   useEffect(() => {}, [pastSolutions])
-  console.log(pastSolutions)
   const suggestedWords = suggestions.map((word, i) => {
     const originalWord = word.toUpperCase()
     word = originalWord.split('')
     return (
-      <div className={`suggestion-row`} key={i}>
+      <div
+        className={`suggestion-row ${
+          hidePastWordles && pastSolutions.includes(originalWord.toLowerCase())
+            ? 'hide-word'
+            : ''
+        }`}
+        key={i}
+      >
         {word.map((letter, index) => (
           <div
             className={`suggestion-square ${
@@ -22,7 +32,11 @@ const SuggestWords = ({ suggestions, pastSolutions }) => {
             id={`${10 + index}`}
             key={index}
           >
-            {letter}
+            {revealWords
+              ? letter
+              : index === 0 || index === word.length - 1
+              ? letter
+              : '*'}
           </div>
         ))}
       </div>

@@ -1,28 +1,28 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react'
 
 // components
-import SuggestWords from "../components/SuggestWords";
-import InfoScreen from "../components/InfoScreen";
+import SuggestWords from '../components/SuggestWords'
+import InfoScreen from '../components/InfoScreen'
 
 // data
-import sourceWords from "../data/wordle-words.json";
-import pastWordles from "../data/pastWordles.json";
+import sourceWords from '../data/wordle-words.json'
+import pastWordles from '../data/pastWordles.json'
 
 //js
-import getSuggestions from "../js/getSuggestions";
+import getSuggestions from '../js/getSuggestions'
 
 // style
-import "../styles/Landing.css";
+import '../styles/Landing.css'
 
 const Landing = () => {
   const [squareClass, setSquareClass] = useState({
-    0: ["", "", "", "", ""],
-    1: ["", "", "", "", ""],
-    2: ["", "", "", "", ""],
-    3: ["", "", "", "", ""],
-    4: ["", "", "", "", ""],
-    5: ["", "", "", "", ""],
-  });
+    0: ['', '', '', '', ''],
+    1: ['', '', '', '', ''],
+    2: ['', '', '', '', ''],
+    3: ['', '', '', '', ''],
+    4: ['', '', '', '', ''],
+    5: ['', '', '', '', '']
+  })
 
   const [letterArray, setLetterArray] = useState({
     0: [[], [], [], [], []],
@@ -30,8 +30,8 @@ const Landing = () => {
     2: [[], [], [], [], []],
     3: [[], [], [], [], []],
     4: [[], [], [], [], []],
-    5: [[], [], [], [], []],
-  });
+    5: [[], [], [], [], []]
+  })
 
   const [rowFull, setRowFull] = useState({
     0: false,
@@ -39,39 +39,45 @@ const Landing = () => {
     2: false,
     3: false,
     4: false,
-    5: false,
-  });
+    5: false
+  })
 
   const [wrongIndex, setWrongIndex] = useState({
     0: [],
     1: [],
     2: [],
     3: [],
-    4: [],
-  });
+    4: []
+  })
 
-  const [activeRow, setActiveRow] = useState(0);
-  const [suggestions, setSuggestions] = useState([]);
-  const [message, setMessage] = useState("Enter your guess below.");
-  const [mustNotContain, setMustNotContain] = useState([]);
-  const [mustContain, setMustContain] = useState([]);
+  const [activeRow, setActiveRow] = useState(0)
+  const [suggestions, setSuggestions] = useState([])
+  const [message, setMessage] = useState('Enter your guess below.')
+  const [mustNotContain, setMustNotContain] = useState([])
+  const [mustContain, setMustContain] = useState([])
   const [pastSolutions, setPastSolutions] = useState([pastWordles])
+  const [revealWords, setRevealWords] = useState(false)
+  const [hidePastWordles, setHidePastWordles] = useState(false)
+  const [pastNumber, setPastNumber] = useState(0)
 
-  let atIndex = {};
-  let inputArray = [];
-  let cleanedList = [];
-  let potentialWords = [];
+  let atIndex = {}
+  let inputArray = []
+  let cleanedList = []
+  let potentialWords = []
 
   useEffect(() => {
-    fetch('https://us-central1-wordlesolverbe.cloudfunctions.net/api/scrapeWords')
-      .then(response => response.json())
-      .then(data => {
+    fetch(
+      'https://us-central1-wordlesolverbe.cloudfunctions.net/api/scrapeWords'
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setPastNumber(Object.keys(data).length)
         processPastWordles(data)
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error:', error)
         processPastWordles(pastWordles) // Use local data if fetch fails
-      });
+      })
   }, [suggestions])
 
   const processPastWordles = (data) => {
@@ -87,74 +93,97 @@ const Landing = () => {
   }
 
   const onlyLetters = (str) => {
-    return /^[a-zA-Z]{1,5}$/.test(str);
-  };
+    return /^[a-zA-Z]{1,5}$/.test(str)
+  }
 
   const handleClick = useCallback((e) => {
     if (!isNaN(parseInt(e.target.id))) {
-      let square = e.target.id.split("");
-      setSquareClass(prevSquareClass => {
-        let rowArray = [...prevSquareClass[square[0]]];
-        rowArray[square[1]] = rowArray[square[1]] === "" ? "correct-letter" : rowArray[square[1]] === "correct-letter" ? "correct-place" : "";
-        return { ...prevSquareClass, [square[0]]: rowArray };
-      });
+      let square = e.target.id.split('')
+      setSquareClass((prevSquareClass) => {
+        let rowArray = [...prevSquareClass[square[0]]]
+        rowArray[square[1]] =
+          rowArray[square[1]] === ''
+            ? 'correct-letter'
+            : rowArray[square[1]] === 'correct-letter'
+            ? 'correct-place'
+            : ''
+        return { ...prevSquareClass, [square[0]]: rowArray }
+      })
     }
-  }, []);
+  }, [])
 
-  const handleChange = useCallback((e) => {
-    if (onlyLetters(e.target.value)) {
-      setMessage("Enter your guess below.");
-      inputArray = e.target.value.toUpperCase().split("");
-      if (inputArray.length === 5) {
-        setRowFull(prevRowFull => ({ ...prevRowFull, [activeRow]: true }));
-        setMessage("Click on letters Wordle has highlighted.");
+  const handleChange = useCallback(
+    (e) => {
+      if (onlyLetters(e.target.value)) {
+        setMessage('Enter your guess below.')
+        inputArray = e.target.value.toUpperCase().split('')
+        if (inputArray.length === 5) {
+          setRowFull((prevRowFull) => ({ ...prevRowFull, [activeRow]: true }))
+          setMessage('Click on letters Wordle has highlighted.')
+        }
+        setLetterArray((prevLetterArray) => ({
+          ...prevLetterArray,
+          [activeRow]: inputArray
+        }))
+      } else {
+        inputArray = [[], [], [], [], []]
+        setLetterArray((prevLetterArray) => ({
+          ...prevLetterArray,
+          [activeRow]: inputArray
+        }))
+        e.target.value = ''
+        setMessage('Oops you entered a number!')
       }
-      setLetterArray(prevLetterArray => ({ ...prevLetterArray, [activeRow]: inputArray }));
-    } else {
-      inputArray = [[], [], [], [], []];
-      setLetterArray(prevLetterArray => ({ ...prevLetterArray, [activeRow]: inputArray }));
-      e.target.value = "";
-      setMessage("Oops you entered a number!");
-    }
-  }, [activeRow]);
+    },
+    [activeRow]
+  )
 
-  const handleButton = useCallback((e) => {
-    e.preventDefault();
-    if (!rowFull[activeRow]) return;
-    setMessage("Searching for possiblewords.");
-    findSuggestions(letterArray[activeRow], squareClass[activeRow]);
-    setActiveRow(prevActiveRow => prevActiveRow + 1);
+  const handleButton = useCallback(
+    (e) => {
+      e.preventDefault()
+      if (!rowFull[activeRow]) return
+      setMessage('Searching for possiblewords.')
+      findSuggestions(letterArray[activeRow], squareClass[activeRow])
+      setActiveRow((prevActiveRow) => prevActiveRow + 1)
 
-    if (activeRow === 5) setMessage("All rows are filled.");
-    if (activeRow < 5) setMessage("Enter your next guess below.");
-  }, [activeRow, rowFull, letterArray, squareClass]);
+      if (activeRow === 5) setMessage('All rows are filled.')
+      if (activeRow < 5) setMessage('Enter your next guess below.')
+    },
+    [activeRow, rowFull, letterArray, squareClass]
+  )
 
   const findSuggestions = async (letters, priority) => {
-    cleanedList = sourceWords;
+    cleanedList = sourceWords
     priority.forEach((ele, index) => {
-      if (ele !== "" && !mustContain.includes(letters[index].toLowerCase()))
-        mustContain.push(letters[index].toLowerCase());
-      if (ele === "" && !mustNotContain.includes(letters[index].toLowerCase()))
-        mustNotContain.push(letters[index].toLowerCase());
-      if (ele[8] === "p") atIndex[index] = letters[index].toLowerCase();
-      if (ele[8] === "l") wrongIndex[index].push(letters[index].toLowerCase());
-    });
+      if (ele !== '' && !mustContain.includes(letters[index].toLowerCase()))
+        mustContain.push(letters[index].toLowerCase())
+      if (ele === '' && !mustNotContain.includes(letters[index].toLowerCase()))
+        mustNotContain.push(letters[index].toLowerCase())
+      if (ele[8] === 'p') atIndex[index] = letters[index].toLowerCase()
+      if (ele[8] === 'l') wrongIndex[index].push(letters[index].toLowerCase())
+    })
 
     potentialWords = await getSuggestions(
       cleanedList,
       mustNotContain,
       mustContain,
       atIndex,
-      wrongIndex,
-    );
+      wrongIndex
+    )
 
-    setWrongIndex(wrongIndex);
-    setSuggestions(potentialWords);
-    setMustContain(mustContain);
-    setMustNotContain(mustNotContain);
-  };
+    setWrongIndex(wrongIndex)
+    setSuggestions(potentialWords)
+    setMustContain(mustContain)
+    setMustNotContain(mustNotContain)
+  }
 
-  
+  const handleHidePastWordles = () => {
+    setHidePastWordles(!hidePastWordles)
+  }
+
+  const handleRevealWords = () => {
+    setRevealWords(!revealWords)
+  }
 
   return (
     <div className="solver-container">
@@ -178,7 +207,7 @@ const Landing = () => {
                 {activeRow === i && (
                   <div
                     className={`letter-input ${
-                      rowFull[i] ? "rowfull" : undefined
+                      rowFull[i] ? 'rowfull' : undefined
                     }`}
                   >
                     <input
@@ -194,7 +223,11 @@ const Landing = () => {
                   </div>
                 )}
                 {Array.from({ length: 5 }, (_, j) => (
-                  <div className={`square ${squareClass[i][j]}`} id={`${i}${j}`} key={`${i}${j}`}>
+                  <div
+                    className={`square ${squareClass[i][j]}`}
+                    id={`${i}${j}`}
+                    key={`${i}${j}`}
+                  >
                     {letterArray[i][j]}
                   </div>
                 ))}
@@ -209,7 +242,31 @@ const Landing = () => {
         </div>
         <div className="word-suggestions">
           {suggestions.length ? (
-            <SuggestWords suggestions={suggestions} pastSolutions={pastSolutions} />
+            <>
+              <p>
+                Number of possible words:{' '}
+                {hidePastWordles
+                  ? suggestions.length - pastSolutions.length
+                  : suggestions.length}
+              </p>
+              <div className="input-buttons">
+                <button onClick={handleRevealWords} aria-label="reveal words">
+                  {revealWords ? 'Conceal' : 'Reveal'}
+                </button>
+                <button
+                  onClick={handleHidePastWordles}
+                  aria-label="hide past Worldes"
+                >
+                  {hidePastWordles ? 'Show Past Wordles' : 'Hide Past Wordles'}
+                </button>
+              </div>
+              <SuggestWords
+                suggestions={suggestions}
+                pastSolutions={pastSolutions}
+                revealWords={revealWords}
+                hidePastWordles={hidePastWordles}
+              />
+            </>
           ) : (
             <>
               <h3>Welcome to the Wordle helper!</h3>
@@ -219,20 +276,15 @@ const Landing = () => {
                   enter the same starter word here and click on any letters that
                   wordle indicated in green or yellow.
                 </li>
+                <li>one click turns a letter yellow.</li>
+                <li>a second click turns a letter green.</li>
                 <li>
-                  one click turns a letter yellow and means correct letter at
-                  wrong position.
-                </li>
-                <li>
-                  a second click turns a letter green and means correct letter
-                  and correct spot in target word.
-                </li>
-                <li>
-                  to recieve suggestions click the button and browse through
+                  to receive suggestions click the button and browse through
                   suggestions.
                 </li>
                 <li>
-                  greyed out words are words that have been used in previous Wordles
+                  greyed out words are words that have been used in previous{' '}
+                  {pastNumber} Wordles
                 </li>
               </ul>
             </>
@@ -240,8 +292,7 @@ const Landing = () => {
         </div>
       </div>
     </div>
-  );
-
+  )
 }
 
-export default Landing;
+export default Landing

@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 // Components
-import DarkMode from "../components/DarkMode";
-import { MdClose } from "react-icons/md";
-import { FiMenu } from "react-icons/fi";
-import { CgBee } from "react-icons/cg";
-import { BsBoundingBoxCircles, BsGrid3X3 } from "react-icons/bs";
+import DarkMode from '../components/DarkMode'
+import { MdClose } from 'react-icons/md'
+import { FiMenu } from 'react-icons/fi'
+import { CgBee } from 'react-icons/cg'
+import { BsBoundingBoxCircles, BsGrid3X3 } from 'react-icons/bs'
 
 const Nav = () => {
-  const [navbarOpen, setNavbarOpen] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false)
 
   const handleToggle = () => {
-    setNavbarOpen((prev) => !prev);
-  };
+    setNavbarOpen((prev) => !prev)
+  }
 
   const closeMenu = () => {
-    setNavbarOpen(false);
-  };
+    setNavbarOpen(false)
+  }
 
   return (
     <>
@@ -28,12 +28,12 @@ const Nav = () => {
             onClick={handleToggle}
           >
             {navbarOpen ? (
-              <MdClose style={{ width: "40px", height: "40px" }} />
+              <MdClose style={{ width: '40px', height: '40px' }} />
             ) : (
-              <FiMenu style={{ width: "40px", height: "40px" }} />
+              <FiMenu style={{ width: '40px', height: '40px' }} />
             )}
           </button>
-          <ul className={`menuNav ${navbarOpen ? "showMenu" : ""}`}>
+          <ul className={`menuNav ${navbarOpen ? 'showMenu' : ''}`}>
             <li>&nbsp;</li>
             <li>
               <a
@@ -47,7 +47,7 @@ const Nav = () => {
               </a>
             </li>
             <li>
-              {" "}
+              {' '}
               <a
                 href="https://spelling-bee-word-puzzle-solver.netlify.app/"
                 rel="noreferrer"
@@ -59,7 +59,7 @@ const Nav = () => {
               </a>
             </li>
             <li>
-              {" "}
+              {' '}
               <a
                 href="https://letter-boxed-solver.netlify.app/"
                 target="_blank"
@@ -106,7 +106,7 @@ const Nav = () => {
       </div>
       <DarkMode />
     </>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

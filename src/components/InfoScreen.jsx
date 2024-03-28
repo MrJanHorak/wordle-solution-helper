@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 
 // data
-import starterWords from "../data/starter-words";
+import starterWords from '../data/starter-words'
 
 // style
-import "../styles/StarterWords.css";
+import '../styles/StarterWords.css'
 
 const InfoScreen = () => {
-  const [suggestedStarters, setSuggestedStarters] = useState([]);
+  const [suggestedStarters, setSuggestedStarters] = useState([])
 
   useEffect(() => {
     const getSeveralRandomWords = () => {
-      const shuffle = [...starterWords].sort(() => 0.5 - Math.random());
-      return shuffle.slice(0, 3);
-    };
+      const shuffle = [...starterWords].sort(() => 0.5 - Math.random())
+      return shuffle.slice(0, 3)
+    }
 
-    setSuggestedStarters(getSeveralRandomWords());
-  }, []);
+    setSuggestedStarters(getSeveralRandomWords())
+  }, [])
 
   const starters = suggestedStarters.map((word, i) => (
     <div className="starter-row" key={i}>
@@ -36,7 +36,7 @@ const InfoScreen = () => {
         {word[4]}
       </div>
     </div>
-  ));
+  ))
 
   // const starter = starterWords[(Math.floor(Math.random() * (1 + starterWords.length-1 )) )];
 
@@ -45,7 +45,7 @@ const InfoScreen = () => {
       Have you tried any of the following starter words?
       {starters}
     </div>
-  );
-};
+  )
+}
 
-export default InfoScreen;
+export default InfoScreen
