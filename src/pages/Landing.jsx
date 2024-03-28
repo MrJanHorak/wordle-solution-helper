@@ -78,6 +78,7 @@ const Landing = () => {
         console.error('Error:', error)
         processPastWordles(pastWordles) // Use local data if fetch fails
       })
+      // eslint-disable-next-line
   }, [suggestions])
 
   const processPastWordles = (data) => {
@@ -116,6 +117,7 @@ const Landing = () => {
     (e) => {
       if (onlyLetters(e.target.value)) {
         setMessage('Enter your guess below.')
+        // eslint-disable-next-line
         inputArray = e.target.value.toUpperCase().split('')
         if (inputArray.length === 5) {
           setRowFull((prevRowFull) => ({ ...prevRowFull, [activeRow]: true }))
@@ -149,6 +151,7 @@ const Landing = () => {
       if (activeRow === 5) setMessage('All rows are filled.')
       if (activeRow < 5) setMessage('Enter your next guess below.')
     },
+  // eslint-disable-next-line
     [activeRow, rowFull, letterArray, squareClass]
   )
 
